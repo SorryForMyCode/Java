@@ -120,6 +120,12 @@ public class Fraction {
         reduceFraction();
     }
 
+    void divide(long number){
+        Fraction fraction = new Fraction(number);
+        divide(fraction);
+        reduceFraction();
+    }
+
     void power(int pow){
         numerator = numerator.pow(pow);
         denominator = denominator.pow(pow);
