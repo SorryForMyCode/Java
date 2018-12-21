@@ -1,37 +1,25 @@
 package root;
 
+import java.math.BigInteger;
+
 public class Fraction {
-    long numerator;//TODO bigInteger
-    long denominator;
+    BigInteger numerator;
+    BigInteger denominator;
 
     Fraction(){
-        numerator = 0;
-        denominator = 0;
+        numerator = new BigInteger("0");
+        denominator = new BigInteger("0");
     }
 
     Fraction(long numerator, long denominator){
-        this.numerator = numerator;
-        this.denominator = denominator;
+        this.numerator = new BigInteger(String.valueOf(numerator));
+        this.denominator = new BigInteger(String.valueOf(denominator));
         this.reduceFraction();
     }
 
     Fraction(long number){
-        numerator = number;
-        denominator = 1;
-    }
-
-    Fraction(Double number){
-        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
-                totalLength = number.toString().length(),
-                numberOfZeros = totalLength - wholeLengthAndDot;
-        long decades = (long)Math.pow(10, numberOfZeros);
-
-        number *= decades;
-
-        numerator = number.longValue();
-        denominator = decades;
-
-        reduceFraction();
+        numerator = new BigInteger(String.valueOf(number));
+        denominator = new BigInteger("1");
     }
 
     public boolean equals(Fraction fraction){
