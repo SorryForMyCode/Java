@@ -36,92 +36,76 @@ public class Fraction {
         denominator = denominator.divide(gcd);
     }
 
-    public void add(double number){
-        Fraction fraction = new Fraction(number);
-        fraction.reduceFraction();
+//    void add(double number){
+//        Fraction fraction = new Fraction(number);
+//        fraction.reduceFraction();
+//
+//        this.numerator = this.numerator.multiply(fraction.denominator).add(this.denominator.multiply(fraction.numerator));
+//        this.denominator = this.denominator.multiply(fraction.denominator);
+//        this.reduceFraction();
+//    }
 
-        this.numerator = this.numerator * fraction.denominator + this.denominator * fraction.numerator;
-        this.denominator *= fraction.denominator;
+    void add(Fraction fraction){
+        this.numerator = this.numerator.multiply(fraction.denominator).add(this.denominator.multiply(fraction.numerator));
+        this.denominator = this.denominator.multiply(fraction.denominator);
         this.reduceFraction();
     }
 
-    public void add(Fraction fraction){
-        this.numerator = this.numerator * fraction.denominator + this.denominator * fraction.numerator;
-        this.denominator *= fraction.denominator;
+    void sub(Fraction fraction){
+        this.numerator = this.numerator.multiply(fraction.denominator).subtract(this.denominator.multiply(fraction.numerator));
+        this.denominator = this.denominator.multiply(fraction.denominator);
         this.reduceFraction();
     }
 
-    public void sub(Fraction fraction){
-        this.numerator = this.numerator * fraction.denominator - this.denominator * fraction.numerator;
-        this.denominator *= fraction.denominator;
-        this.reduceFraction();
+    void multiply(Fraction fraction){
+        this.numerator = this.numerator.multiply(fraction.numerator);
+        this.denominator = this.denominator.multiply(fraction.denominator);
     }
 
-    public void multiply(Fraction fraction){
-        this.numerator *= fraction.numerator;
-        this.denominator *= fraction.denominator;
-    }
+//    static Double toDouble(Fraction fraction){
+//        return (double)fraction.numerator / fraction.denominator;
+//    }
 
-    static Double toDouble(Fraction fraction){
-        return (double)fraction.numerator / fraction.denominator;
-    }
+//    public static boolean compare(Fraction a, Fraction b){
+//        return Fraction.toDouble(a) > Fraction.toDouble(b);
+//    }
 
-    public static boolean compare(Fraction a, Fraction b){
-        return Fraction.toDouble(a) > Fraction.toDouble(b);
-    }
+//    void multiply(Double number){
+//        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
+//                totalLength = number.toString().length(),
+//                numberOfZeros = totalLength - wholeLengthAndDot;
+//        long decades = (long)Math.pow(10, numberOfZeros);
+//
+//        number *= decades;
+//
+//        numerator *= number.longValue();
+//        denominator *= decades;
+//
+//        reduceFraction();
+//    }
 
-    public void multiply(Double number){
-        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
-                totalLength = number.toString().length(),
-                numberOfZeros = totalLength - wholeLengthAndDot;
-        long decades = (long)Math.pow(10, numberOfZeros);
+//    void divide(Double number){
+//        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
+//                totalLength = number.toString().length(),
+//                numberOfZeros = totalLength - wholeLengthAndDot;
+//        long decades = (long)Math.pow(10, numberOfZeros);
+//
+//        number *= decades;
+//
+//        denominator *= number.longValue();
+//        numerator *= decades;
+//
+//        reduceFraction();
+//    }
 
-        number *= decades;
-
-        numerator *= number.longValue();
-        denominator *= decades;
-
-        reduceFraction();
-    }
-
-    public void divide(Double number){
-        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
-                totalLength = number.toString().length(),
-                numberOfZeros = totalLength - wholeLengthAndDot;
-        long decades = (long)Math.pow(10, numberOfZeros);
-
-        number *= decades;
-
-        denominator *= number.longValue();
-        numerator *= decades;
-
-        reduceFraction();
-    }
-
-    private static long lcm(long a, long b){
-        return a / gcd(a, b) * b;
-    }
-
-    private static long gcd(long a, long b){
-        while(b != 0){
-            a %= b;
-            long buf = a;
-            a = b;
-            b = buf;
-        }
-        return a;
-    }
-
-    public void power(long pow){
-        Fraction multiplier = new Fraction(this.numerator, this.denominator);
-        for (int i = 0; i < pow; i++) {
-            this.multiply(multiplier);
-        }
+    void power(int pow){
+        numerator = numerator.pow(pow);
+        denominator = denominator.pow(pow);
     }
 
     @Override
     public String toString() {
-        return denominator == 1 ? "" + numerator :
+        return denominator.toString() == "1" ? numerator.toString() :
                 numerator + "/" + denominator;
     }
 
