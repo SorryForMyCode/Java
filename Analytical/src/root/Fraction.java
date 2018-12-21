@@ -37,11 +37,11 @@ public class Fraction {
     }
 
     boolean equals(Fraction fraction){
-        this.reduceFraction();
+        reduceFraction();
         fraction.reduceFraction();
 
-        return this.numerator == fraction.numerator &&
-                this.denominator == fraction.denominator;
+        return numerator.equals(fraction.numerator) &&
+                denominator.equals(fraction.denominator);
     }
 
     private void reduceFraction(){
@@ -66,7 +66,7 @@ public class Fraction {
     }
 
     void add(BigInteger number){
-        number = numerator.multiply(this.denominator);
+        number = number.multiply(this.denominator);
         numerator = numerator.add(number);
         reduceFraction();
     }
@@ -86,28 +86,10 @@ public class Fraction {
         numerator = numerator.multiply(number);
     }
 
-//    static Double toDouble(Fraction fraction){
-//        return (double)fraction.numerator / fraction.denominator;
-//    }
-
     static boolean compare(Fraction a, Fraction b){
         int cmp = a.numerator.multiply(b.denominator).compareTo(b.numerator.multiply(a.numerator));
         return  cmp > 0;
     }
-
-//    void multiply(Double number){
-//        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
-//                totalLength = number.toString().length(),
-//                numberOfZeros = totalLength - wholeLengthAndDot;
-//        long decades = (long)Math.pow(10, numberOfZeros);
-//
-//        number *= decades;
-//
-//        numerator *= number.longValue();
-//        denominator *= decades;
-//
-//        reduceFraction();
-//    }
 
     void divide(Fraction fraction){
         numerator = numerator.multiply(fraction.denominator);
@@ -133,7 +115,7 @@ public class Fraction {
 
     @Override
     public String toString() {
-        return denominator.toString() == "1" ? numerator.toString() :
+        return denominator.toString().equals("1") ? numerator.toString() :
                 numerator + "/" + denominator;
     }
 
