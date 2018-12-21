@@ -1,5 +1,6 @@
 package root;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Member {
@@ -47,15 +48,14 @@ public class Member {
         }
     }
 
-    public void integrate(){
+    void integrate(){
         degreeOfVariable.add(1);
-        fraction.divide((double)degreeOfVariable.numerator);
-        fraction.multiply((double)degreeOfVariable.denominator);
+        fraction.divide(degreeOfVariable);
     }
 
-    public Fraction valueAtPoint(double point){
+    Fraction valueAtPoint(double point){
         Fraction value = new Fraction(point);
-        value.power(degreeOfVariable.numerator);
+        value.power(degreeOfVariable.numerator.intValue());
         value.multiply(fraction);
 
         return value;
@@ -97,15 +97,15 @@ public class Member {
                 continue;
             }
             if(i == 0 || temporary.charAt(i) == '*') {
-                fraction.multiply(Double.parseDouble(temporary.substring(start, end)));
+                fraction.multiply(new BigInteger(temporary.substring(start, end)));//fraction.multiply(Double.parseDouble(temporary.substring(start, end)));
                 removeStr(start, end);
                 if(i != 0) removeLastChar();
             } else if(temporary.charAt(i) == '/'){
-                fraction.divide(Double.parseDouble(temporary.substring(start, end)));
+                fraction.divide(new BigInteger(temporary.substring(start, end)));
                 removeStr(start, end);
                 removeLastChar();
             } else if(temporary.charAt(i) == '-'){
-                fraction.add(Double.parseDouble(temporary.substring(start, end)));
+                fraction.add(new BigInteger(temporary.substring(start, end)));
             }
         }
     }
@@ -162,8 +162,8 @@ public class Member {
         temporary = str.toString();
     }
 
-    public static boolean compare(Member a, Member b){
-        return Fraction.toDouble(a.degreeOfVariable) > Fraction.toDouble(b.degreeOfVariable);
+    static boolean compare(Member a, Member b){
+        return Fraction.compare(a.degreeOfVariable, b.degreeOfVariable);
     }
 
     @Override
