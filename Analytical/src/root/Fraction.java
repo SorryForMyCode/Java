@@ -31,13 +31,9 @@ public class Fraction {
     }
 
     private void reduceFraction(){
-        if(numerator == 0 || denominator == 0) return;
-        for(long multiply = gcd(numerator, denominator);
-            multiply != 1 && multiply != 0;
-            multiply = gcd(numerator, denominator)){
-            numerator /= multiply;
-            denominator /= multiply;
-        }
+        BigInteger gcd = numerator.gcd(denominator);
+        numerator = numerator.divide(gcd);
+        denominator = denominator.divide(gcd);
     }
 
     public void add(double number){
