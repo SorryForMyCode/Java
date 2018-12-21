@@ -22,6 +22,20 @@ public class Fraction {
         denominator = new BigInteger("1");
     }
 
+    Fraction(Double number){
+        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
+                totalLength = number.toString().length(),
+                numberOfZeros = totalLength - wholeLengthAndDot;
+        long decades = (long)Math.pow(10, numberOfZeros);
+
+        number *= decades;
+
+        numerator = new BigInteger(String.valueOf(number.longValue()));
+        denominator = new BigInteger(String.valueOf(decades));
+
+        reduceFraction();
+    }
+
     boolean equals(Fraction fraction){
         this.reduceFraction();
         fraction.reduceFraction();
@@ -36,14 +50,14 @@ public class Fraction {
         denominator = denominator.divide(gcd);
     }
 
-//    void add(double number){
-//        Fraction fraction = new Fraction(number);
-//        fraction.reduceFraction();
-//
-//        this.numerator = this.numerator.multiply(fraction.denominator).add(this.denominator.multiply(fraction.numerator));
-//        this.denominator = this.denominator.multiply(fraction.denominator);
-//        this.reduceFraction();
-//    }
+    void add(long number){
+        Fraction fraction = new Fraction(number);
+        fraction.reduceFraction();
+
+        this.numerator = this.numerator.multiply(fraction.denominator).add(this.denominator.multiply(fraction.numerator));
+        this.denominator = this.denominator.multiply(fraction.denominator);
+        this.reduceFraction();
+    }
 
     void add(Fraction fraction){
         this.numerator = this.numerator.multiply(fraction.denominator).add(this.denominator.multiply(fraction.numerator));
@@ -84,19 +98,16 @@ public class Fraction {
 //        reduceFraction();
 //    }
 
-//    void divide(Double number){
-//        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
-//                totalLength = number.toString().length(),
-//                numberOfZeros = totalLength - wholeLengthAndDot;
-//        long decades = (long)Math.pow(10, numberOfZeros);
-//
-//        number *= decades;
-//
-//        denominator *= number.longValue();
-//        numerator *= decades;
-//
-//        reduceFraction();
-//    }
+    void divide(Fraction fraction){
+        numerator = numerator.multiply(fraction.denominator);
+        denominator = denominator.multiply(fraction.numerator);
+        reduceFraction();
+    }
+
+    void divide(BigInteger number){
+        denominator = denominator.multiply(number);
+        reduceFraction();
+    }
 
     void power(int pow){
         numerator = numerator.pow(pow);
