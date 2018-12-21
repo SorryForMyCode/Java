@@ -14,12 +14,12 @@ public class Main {
 
         Equation equation;//t*(t+1)*(t+2)*(t+3)*(t+4)*(t+5)*(t+6)
         long fac = 1;
-        for (int i = 0; i < n; i++) {
-            if(i > 0) fac *= (fac + 1);
+        for (int i = 0, inc = 1; i < n; i++, ++inc) {
+            if(i > 0) fac *= inc;
 
             equation = new Equation(stringEquation(i)  , "t");
             cof[i] = equation.integrate(0, 1);
-            cof[i].multiply(new Fraction(1, fac));
+            cof[i].divide(fac);
 
             System.out.println(cof[i]);
         }
