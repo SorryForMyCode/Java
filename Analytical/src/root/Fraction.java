@@ -22,7 +22,7 @@ public class Fraction {
         denominator = new BigInteger("1");
     }
 
-    public boolean equals(Fraction fraction){
+    boolean equals(Fraction fraction){
         this.reduceFraction();
         fraction.reduceFraction();
 
@@ -30,13 +30,7 @@ public class Fraction {
                 this.denominator == fraction.denominator;
     }
 
-    public boolean equals(Double degree){
-        Fraction fraction = new Fraction(degree);
-        return this.equals(fraction);
-    }
-
-
-    public void reduceFraction(){
+    private void reduceFraction(){
         if(numerator == 0 || denominator == 0) return;
         for(long multiply = gcd(numerator, denominator);
             multiply != 1 && multiply != 0;
