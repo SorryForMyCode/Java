@@ -54,35 +54,46 @@ public class Fraction {
         Fraction fraction = new Fraction(number);
         fraction.reduceFraction();
 
-        this.numerator = this.numerator.multiply(fraction.denominator).add(this.denominator.multiply(fraction.numerator));
-        this.denominator = this.denominator.multiply(fraction.denominator);
-        this.reduceFraction();
+        numerator = numerator.multiply(fraction.denominator).add(denominator.multiply(fraction.numerator));
+        denominator = denominator.multiply(fraction.denominator);
+        reduceFraction();
     }
 
     void add(Fraction fraction){
-        this.numerator = this.numerator.multiply(fraction.denominator).add(this.denominator.multiply(fraction.numerator));
-        this.denominator = this.denominator.multiply(fraction.denominator);
-        this.reduceFraction();
+        numerator = numerator.multiply(fraction.denominator).add(denominator.multiply(fraction.numerator));
+        denominator = denominator.multiply(fraction.denominator);
+        reduceFraction();
+    }
+
+    void add(BigInteger number){
+        number = numerator.multiply(this.denominator);
+        numerator = numerator.add(number);
+        reduceFraction();
     }
 
     void sub(Fraction fraction){
-        this.numerator = this.numerator.multiply(fraction.denominator).subtract(this.denominator.multiply(fraction.numerator));
-        this.denominator = this.denominator.multiply(fraction.denominator);
-        this.reduceFraction();
+        numerator = numerator.multiply(fraction.denominator).subtract(denominator.multiply(fraction.numerator));
+        denominator = denominator.multiply(fraction.denominator);
+        reduceFraction();
     }
 
     void multiply(Fraction fraction){
-        this.numerator = this.numerator.multiply(fraction.numerator);
-        this.denominator = this.denominator.multiply(fraction.denominator);
+        numerator = numerator.multiply(fraction.numerator);
+        denominator = denominator.multiply(fraction.denominator);
+    }
+
+    void multiply(BigInteger number){
+        numerator = numerator.multiply(number);
     }
 
 //    static Double toDouble(Fraction fraction){
 //        return (double)fraction.numerator / fraction.denominator;
 //    }
 
-//    public static boolean compare(Fraction a, Fraction b){
-//        return Fraction.toDouble(a) > Fraction.toDouble(b);
-//    }
+    static boolean compare(Fraction a, Fraction b){
+        int cmp = a.numerator.multiply(b.denominator).compareTo(b.numerator.multiply(a.numerator));
+        return  cmp > 0;
+    }
 
 //    void multiply(Double number){
 //        int wholeLengthAndDot = String.valueOf(number.intValue()).length() + 1,
