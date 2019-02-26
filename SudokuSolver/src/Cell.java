@@ -7,14 +7,14 @@ public class Cell {
     Set<Integer> predict = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
     Integer value;
     boolean used = false;
-    TextField jPredict;
-    TextField jValue;
+    TextField jPredict = new TextField();
+    TextField jValue = new TextField();
     JPanel jPanel;
 
     Cell(String value){
         this.value = Integer.valueOf(value);
         writeJPredict();
-        writeJValue();
+        writeJValue(value);
         writeJPanel();
 
         handleTextField();
@@ -37,12 +37,12 @@ public class Cell {
         String predict = this.predict.toString();
         predict = predict.substring(0, predict.length()/2) + '\n' + predict.substring(predict.length()/2);
 
-        jPredict = new TextField(predict);
+        jPredict.setText(predict);
         jPredict.setEditable(false);
     }
 
-    private void writeJValue(){
-        jValue = new TextField( value.toString());
+    private void writeJValue(String text){
+        jValue.setText(text);
         jValue.setFont(new Font("brush script mt", Font.ITALIC, 30));
     }
 
@@ -66,7 +66,7 @@ public class Cell {
             value = Integer.valueOf(jValue.getText());
             predict.clear();
             jPredict.setText("");
-            
+
         } catch (Exception e){
             System.out.println("Trouble");
         }
