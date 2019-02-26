@@ -7,7 +7,7 @@ public class Cell {
     Set<Integer> predict = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
     Integer value;
     boolean used = false;
-    TextArea jPredict;
+    TextField jPredict;
     TextField jValue;
     JPanel jPanel;
 
@@ -38,7 +38,7 @@ public class Cell {
         String predict = this.predict.toString();
         predict = predict.substring(0, predict.length()/2) + '\n' + predict.substring(predict.length()/2);
 
-        jPredict = new TextArea(predict);
+        jPredict = new TextField(predict);
         jPredict.setEditable(false);
     }
 
@@ -49,7 +49,7 @@ public class Cell {
 
     private void writeJPanel(){
         jPanel = new JPanel(new BorderLayout());
-        //jPanel.add(jPredict, BorderLayout.NORTH);
+        jPanel.add(jPredict, BorderLayout.NORTH);
         jPanel.add(jValue, BorderLayout.CENTER);
     }
 
