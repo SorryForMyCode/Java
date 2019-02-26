@@ -25,8 +25,7 @@ public class Cell {
     }
 
     void removePredict(Integer val){
-        if(predict.remove(val))
-            writeJPredict();
+        predict.remove(val);
     }
 
     @Override
@@ -58,7 +57,6 @@ public class Cell {
             @Override
             public void textValueChanged(TextEvent e) {
                 updateText();
-                used = true;
             }
         });
     }
@@ -66,7 +64,9 @@ public class Cell {
     private void updateText(){
         try {
             value = Integer.valueOf(jValue.getText());
-            removePredict(value);
+            predict.clear();
+            jPredict.setText("");
+            
         } catch (Exception e){
             System.out.println("Trouble");
         }
