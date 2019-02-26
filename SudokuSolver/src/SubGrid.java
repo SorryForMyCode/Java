@@ -2,15 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 
 class SubGrid {
+    private int colPos, rowPos;
     private Cell[][] subGrid = new Cell[3][3];
 
     SubGrid(int row, int col, Grid grid){
         Cell[][] cells = grid.getCells();
+        rowPos = row;
+        colPos = col;
 
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                subGrid[i][j] = cells[3 * row + i][3 * col + j];
-            }
+            System.arraycopy(cells[3 * row + i], 3 * col, subGrid[i], 0, 3);
         }
     }
 
