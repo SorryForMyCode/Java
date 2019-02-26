@@ -20,6 +20,10 @@ public class Cell {
         handleTextField();
     }
 
+    boolean isEmpty(){
+        return value == 0;
+    }
+
     JPanel getJPanel() {
         return jPanel;
     }
