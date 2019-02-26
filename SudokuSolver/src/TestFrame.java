@@ -17,8 +17,8 @@ class TestFrame extends JFrame {
     }
 
     private void settings(){
-        setLocation(350, 1);
-        setSize(600, 500);
+        setLocation(200, 1);
+        setSize(1320, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("SudokuSolver");
         setLayout(new BorderLayout());
