@@ -27,12 +27,7 @@ public class Cell {
     void removePredict(Integer val){
         predict.remove(val);
     }
-
-    @Override
-    public String toString() {
-        return value.toString();
-    }
-
+    
     private void writeJPredict(){
         String predict = this.predict.toString();
         predict = predict.substring(0, predict.length()/2) + '\n' + predict.substring(predict.length()/2);
@@ -71,5 +66,10 @@ public class Cell {
             System.out.println("Trouble");
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 }
